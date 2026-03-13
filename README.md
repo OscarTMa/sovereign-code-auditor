@@ -25,6 +25,8 @@ graph TD
 
     C -->|Generates| G[Security & Architecture Report]
     G -->|Download| H[Markdown Report]
+```
+
 🚀 Key Features
 Frontier Reasoning: Multi-step vulnerability analysis (Chain-of-Thought) applied to complex business logic.
 
