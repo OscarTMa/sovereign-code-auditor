@@ -1,64 +1,85 @@
 import streamlit as st
 import os
 from openai import OpenAI
-from utils import build_repo_context  # Asumiendo que guardaste el lector anterior en utils.py
+from utils import build_repo_context
 
-# 1. Configuración de la página
-st.set_page_config(page_title="Nemotron Code Auditor", page_icon="🛡️", layout="wide")
+# --- UI Configuration ---
+st.set_page_config(page_title="Sovereign Code Auditor", page_icon="🛡️", layout="wide")
 
-st.title("🛡️ Nemotron 3 Super: Auditoría de Código Soberana")
+st.title("🛡️ Nemotron 3 Super: Sovereign Code Auditor")
 st.markdown("""
-Esta herramienta utiliza el modelo **NVIDIA Nemotron 3 Super (120B)** para realizar un razonamiento profundo 
-sobre repositorios completos, garantizando privacidad y precisión técnica.
+Deep reasoning security agent powered by **NVIDIA Nemotron 3 Super (120B)**. 
+Analyzes entire repositories for vulnerabilities and architectural flaws.
 """)
 
-# 2. Sidebar para configuración
-with st.sidebar:
-    st.header("Configuración")
-    api_key = st.text_input("NVIDIA API Key", type="password")
-    project_path = st.text_input("Ruta local del repositorio", placeholder="/usuario/proyectos/mi-repo")
-    
-    st.info("Este modelo de 120B parámetros analiza vulnerabilidades, lógica y arquitectura.")
+# --- API Key Management (Local vs Cloud) ---
+# Try to get key from HF Secrets or Environment variables
+api_key_env = os.environ.get("NVIDIA_API_KEY")
 
-# 3. Lógica principal
-if st.button("🚀 Iniciar Auditoría Profunda"):
-    if not api_key or not project_path:
-        st.error("Por favor, proporciona la API Key y la ruta del proyecto.")
-    elif not os.path.exists(project_path):
-        st.error("La ruta especificada no existe.")
+with st.sidebar:
+    st.header("Settings")
+    if api_key_env:
+        st.success("API Key detected from Secrets")
+        api_key = api_key_env
+    else:
+        api_key = st.text_input("Enter NVIDIA API Key", type="password")
+        st.info("Get your key at build.nvidia.com")
+
+    project_path = st.text_input("Local Repository Path", placeholder="/home/user/my-project")
+    
+    st.divider()
+    st.caption("Model: nvidia/nemotron-3-super-120b")
+    st.caption("Context Window: 1,000,000 Tokens")
+
+# --- Execution Logic ---
+if st.button("🚀 Start Deep Audit"):
+    if not api_key:
+        st.error("Please provide an API Key.")
+    elif not project_path:
+        st.error("Please provide a project path.")
     else:
         try:
-            with st.spinner("Leyendo repositorio y preparando contexto masivo..."):
-                # Llamamos a la función de lectura que creamos antes
-                contexto = build_repo_context(project_path)
-                
-            st.success(f"Contexto preparado exitosamente.")
+            # 1. Build Context
+            with st.spinner("Processing repository..."):
+                full_context = build_repo_context(project_path)
+            
+            # 2. Connect to NVIDIA NIM API
+            client = OpenAI(
+                base_url="https://integrate.api.nvidia.com/v1",
+                api_key=api_key
+            )
 
-            # Inicializar cliente de NVIDIA
-            client = OpenAI(base_url="https://integrate.api.nvidia.com/v1", api_key=api_key)
-
-            with st.spinner("Nemotron está razonando sobre tu código..."):
+            # 3. AI Reasoning Request
+            with st.spinner("Nemotron is reasoning over your codebase..."):
                 response = client.chat.completions.create(
                     model="nvidia/nemotron-3-super-120b",
                     messages=[
-                        {"role": "system", "content": "Eres un auditor senior de ciberseguridad. Analiza el código y genera un reporte estructurado en Markdown con secciones de: Vulnerabilidades, Mejoras de Lógica y Plan de Despliegue."},
-                        {"role": "user", "content": contexto}
+                        {
+                            "role": "system", 
+                            "content": "You are a Senior Cybersecurity Auditor. Provide a detailed security report in Markdown. Identify vulnerabilities, logic errors, and suggest architectural improvements."
+                        },
+                        {"role": "user", "content": f"Analyze this codebase:\n\n{full_context}"}
                     ],
                     temperature=0.1
                 )
                 
-                reporte = response.choices[0].message.content
+                report = response.choices[0].message.content
 
-            # 4. Mostrar Resultados
-            st.divider()
-            st.subheader("📊 Reporte de Auditoría")
-            st.markdown(reporte)
+            # 4. Results
+            st.success("Audit Complete!")
+            st.markdown("### 📊 Security & Architecture Report")
+            st.markdown(report)
             
-            # Opción para descargar el reporte
-            st.download_button("Descargar Reporte (MD)", reporte, file_name="auditoria_nemotron.md")
+            st.download_button(
+                label="Download Report as Markdown",
+                data=report,
+                file_name="security_audit_report.md",
+                mime="text/markdown"
+            )
 
         except Exception as e:
-            st.error(f"Ocurrió un error durante el análisis: {e}")
+            st.error(f"An error occurred: {str(e)}")
 
-# Pie de página técnico
-st.caption("Desarrollado con NVIDIA Nemotron 3 Super | Contexto: 1M Tokens | Inferencia FP8")
+# --- Footer ---
+st.divider()
+st.center = st.caption("Sovereign AI Portafolio Project - 2026")
