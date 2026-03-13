@@ -36,27 +36,30 @@ graph TD
 
 ## 🛠️ Tech Stack
 
-Model: NVIDIA Nemotron 3 Super (120B) - FP8 Inference.
-Orchestration: Python 3.11+ & OpenAI SDK (NVIDIA NIM compatible).
-Interface: Streamlit (Interactive Dashboard).
-Infrastructure: NVIDIA Build API / Hugging Face Spaces.
+- **Model:** NVIDIA Nemotron 3 Super (120B) - FP8 Inference.
+- **Orchestration:** Python 3.11+ & OpenAI SDK (NVIDIA NIM compatible).
+- **Interface:** Streamlit (Interactive Dashboard).
+- **Infrastructure:** NVIDIA Build API / Hugging Face Spaces.
 
 ## 💻 Installation & Usage
-Clone the repository:
 
-Bash
+1. Clone the repository:
+
+```Bash
 git clone [https://github.com/oscartm/sovereign-code-auditor.git](https://github.com/oscartm/sovereign-code-auditor.git)
 cd sovereign-code-auditor
-Install dependencies:
+```
+
+2. Install dependencies:
 
 ```Bash
 pip install -r requirements.txt
 ```
 
-Configure API Key:
+3. Configure API Key:
 Obtain your free NVAPI_KEY at build.nvidia.com.
 
-Run the application:
+4. Run the application:
 
 ```Bash
 streamlit run app.py
