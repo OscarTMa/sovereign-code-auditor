@@ -1,3 +1,14 @@
+---
+title: Sovereign Code Auditor
+emoji: 🛡️
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: 1.31.0
+app_file: app.py
+pinned: false
+---
+
 # 🛡️ Sovereign Code Auditor: Powered by Nemotron 3 Super
 
 This project is a **Cybersecurity & Architecture Audit Agent** designed to analyze entire codebases privately and sovereignly. It leverages the frontier model **NVIDIA Nemotron 3 Super (120B)** to perform deep reasoning across massive contexts (up to 1M tokens).
