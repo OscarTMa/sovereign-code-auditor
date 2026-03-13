@@ -43,32 +43,32 @@ graph TD
 
 ## 💻 Installation & Usage
 
-**1. Clone the repository:**
+**1.Clone the repository:**
 
 ```Bash
 git clone [https://github.com/oscartm/sovereign-code-auditor.git](https://github.com/oscartm/sovereign-code-auditor.git)
 cd sovereign-code-auditor
 ```
 
-**2. Install dependencies:**
+**2.Install dependencies:**
 
 ```Bash
 pip install -r requirements.txt
 ```
 
-**3. Configure API Key:**                              
-Obtain your free NVAPI_KEY at build.nvidia.com.
+**3.Configure API Key:**                              
+Obtain your free `NVAPI_KEY` at build.nvidia.com.
 
-**4. Run the application:**
+**4.Run the application:**
 
 ```Bash
 streamlit run app.py
 ```
 
 ## 📋 Audit Example
-**Input:** Python/Flask microservices repository.
-**Reasoning:** Nemotron detected that an environment variable in config.py was being called without validation in db_connector.py, creating a potential injection risk.
-**Output:** Detailed report with the suggested code patch and architectural fix.
+**Input:** Python/Flask microservices repository.                            
+**Reasoning:** Nemotron detected that an environment variable in config.py was being called without validation in db_connector.py, creating a potential injection risk.       
+**Output:** Detailed report with the suggested code patch and architectural fix.                   
 
 ## 📄 License
 This project is licensed under the MIT License. The Nemotron 3 Super model is subject to NVIDIA’s applicable license terms.
