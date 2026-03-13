@@ -43,23 +43,23 @@ graph TD
 
 ## 💻 Installation & Usage
 
-**1.Clone the repository:**
+**1. Clone the repository:**
 
 ```Bash
 git clone [https://github.com/oscartm/sovereign-code-auditor.git](https://github.com/oscartm/sovereign-code-auditor.git)
 cd sovereign-code-auditor
 ```
 
-**2.Install dependencies:**
+**2. Install dependencies:**
 
 ```Bash
 pip install -r requirements.txt
 ```
 
-**3.Configure API Key:**                              
+**3. Configure API Key:**                              
 Obtain your free `NVAPI_KEY` at build.nvidia.com.
 
-**4.Run the application:**
+**4. Run the application:**
 
 ```Bash
 streamlit run app.py
