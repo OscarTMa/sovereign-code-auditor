@@ -45,8 +45,10 @@ graph TD
 
 **1. Clone the repository:**
 
-```Bash
+
 git clone [https://github.com/oscartma/sovereign-code-auditor.git](https://github.com/oscartma/sovereign-code-auditor.git)
+```Bash
+
 cd sovereign-code-auditor
 ```
 
