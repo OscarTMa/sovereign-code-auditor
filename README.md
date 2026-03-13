@@ -29,10 +29,10 @@ graph TD
 
 ## 🚀 Key Features
 
-Frontier Reasoning: Multi-step vulnerability analysis (Chain-of-Thought) applied to complex business logic.
-Massive Context (1M Tokens): Capacity to "read" and understand cross-file relationships within hundreds of files simultaneously.
-Sovereign AI: Designed to run on private infrastructure (NVIDIA NIM), eliminating dependency on closed-source APIs and protecting intellectual property.
-Automated Reporting: Generates detailed Markdown reports including risk severity levels and mitigation roadmaps.
+- ## Frontier Reasoning: Multi-step vulnerability analysis (Chain-of-Thought) applied to complex business logic.
+- ## Massive Context (1M Tokens): Capacity to "read" and understand cross-file relationships within hundreds of files simultaneously.
+- ## Sovereign AI: Designed to run on private infrastructure (NVIDIA NIM), eliminating dependency on closed-source APIs and protecting intellectual property.
+- ## Automated Reporting: Generates detailed Markdown reports including risk severity levels and mitigation roadmaps.
 
 ## 🛠️ Tech Stack
 
