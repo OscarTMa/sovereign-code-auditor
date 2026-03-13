@@ -28,7 +28,7 @@ with st.sidebar:
     project_path = st.text_input("Local Repository Path", placeholder="/home/user/my-project")
     
     st.divider()
-    st.caption("Model: nvidia/nemotron-3-super-120b")
+    st.caption("Model: nvidia/nemotron-3-super-120b-a12b")
     st.caption("Context Window: 1,000,000 Tokens")
 
 # --- Execution Logic ---
@@ -52,7 +52,7 @@ if st.button("🚀 Start Deep Audit"):
             # 3. AI Reasoning Request
             with st.spinner("Nemotron is reasoning over your codebase..."):
                 response = client.chat.completions.create(
-                    model="nvidia/nemotron-3-super-120b",
+                    model="nvidia/nemotron-3-super-120b-a12b",
                     messages=[
                         {
                             "role": "system", 
